@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Text;
 
 public class BestiaryUIManager : MonoBehaviour
 {
     public GameObject bestiaryPanel;
-    public Text fishListText; // Assign this to a Text UI inside the panel
+    public GameObject detailPanel;
+    public Text detailText;
 
     private bool isVisible = false;
 
@@ -13,25 +13,29 @@ public class BestiaryUIManager : MonoBehaviour
     {
         isVisible = !isVisible;
         bestiaryPanel.SetActive(isVisible);
-
-        if (isVisible)
-        {
-            UpdateFishList();
-        }
+        detailPanel.SetActive(false);
     }
 
-    void UpdateFishList()
+    // Attach this to the fish button manually in the Inspector
+    public void OpenFishDetail()
     {
-        if (fishListText == null) return;
+        bestiaryPanel.SetActive(false);
+        detailPanel.SetActive(true);
+        detailText.text = "Details for Fishy Fish"; // Placeholder
+    }
 
-        var allFish = BestiaryManager.Instance.GetCaughtFish();
-        StringBuilder sb = new StringBuilder("Caught Fish:\n");
+    // Attach this to a back button inside the detail panel
+    public void BackToList()
+    {
+        detailPanel.SetActive(false);
+        bestiaryPanel.SetActive(true);
+    }
 
-        foreach (var fish in allFish)
-        {
-            sb.AppendLine("- " + fish);
-        }
-
-        fishListText.text = sb.ToString();
+    // Attach this to a 'Close Bestiary' button
+    public void CloseBestiary()
+    {
+        bestiaryPanel.SetActive(false);
+        detailPanel.SetActive(false);
+        isVisible = false;
     }
 }
