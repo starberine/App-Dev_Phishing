@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class BestiaryMenuView : View
 {
     [SerializeField] private Button _backButton;
-    // [SerializeField] private AudioSource _audioSource;
-    // [SerializeField] private AudioClip _buttonClickSFX;
 
     public override void Initialize()
     {
@@ -14,6 +12,7 @@ public class BestiaryMenuView : View
 
     private void OnBackButtonClick()
     {
-        ViewManager.ShowLast(); // Go back to previous view
+        AudioManager.instance.PlayButtonPressSFX();  
+        ViewManager.ShowLast();                     
     }
 }

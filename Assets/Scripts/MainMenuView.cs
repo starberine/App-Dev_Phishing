@@ -17,19 +17,19 @@ public class MainMenuView : View
 
     private void PlayGame()
     {
-        SceneManager.LoadScene("GameScene"); // Replace with your actual game scene name
+        AudioManager.instance.PlayButtonPressSFX();
+        SceneManager.LoadScene("GameScene");
     }
 
     private void ExitGame()
     {
+        AudioManager.instance.PlayButtonPressSFX();
         Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
     }
-
+    
     private void OpenSettings()
     {
+        AudioManager.instance.PlayButtonPressSFX();
         ViewManager.Show<SettingsMenuView>();
     }
 }

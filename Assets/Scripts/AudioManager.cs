@@ -1,18 +1,29 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager instance;
 
-    private float _mainVolume = 1f;
-    private float _bgmVolume = 1f;
-    private float _sfxVolume = 1f;
+    [Header("Audio Sources")]
+    public AudioSource bgmSource;
+    public AudioSource sfxSource;
+
+    [Header("Audio Clips")]
+    public AudioClip mainMenuBGM;
+    public AudioClip gameSceneBGM;           // added
+    public AudioClip fishingCaughtSFX;       // added
+    public AudioClip buttonPressSFX;
+
+    private float masterVolume = 1f;
+    private float bgmVolume = 1f;
+    private float sfxVolume = 1f;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -21,22 +32,81 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public float GetMainVolume() => _mainVolume;
-    public float GetBGMVolume() => _bgmVolume;
-    public float GetSFXVolume() => _sfxVolume;
-
-    public void SetMainVolume(float volume)
+    private void Start()
     {
-        _mainVolume = volume;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-    public void SetBGMVolume(float volume)
+    private void OnDestroy()
     {
-        _bgmVolume = volume;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void SetSFXVolume(float volume)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        _sfxVolume = volume;
+        if (scene.name == "MainMenuScene")
+            PlayBGM(mainMenuBGM);
+        else if (scene.name == "GameScene")
+            PlayBGM(gameSceneBGM);
+        else
+            bgmSource.Stop();
+    }
+
+    public void PlayBGM(AudioClip clip)
+    {
+        if (bgmSource.clip == clip && bgmSource.isPlaying) return;
+
+        bgmSource.Stop();
+        bgmSource.clip = clip;
+        bgmSource.loop = true;
+        bgmSource.volume = bgmVolume * masterVolume;
+        bgmSource.time = 2f; // optional skip
+        bgmSource.Play();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip, sfxVolume * masterVolume);
+    }
+
+    public void PlayFishingCaughtSFX()
+    {
+        PlaySFX(fishingCaughtSFX);
+    }
+
+    public void PlayButtonPressSFX()
+    {
+        PlaySFX(buttonPressSFX);
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        masterVolume = value;
+        UpdateVolumes();
+    }
+
+    public void SetBGMVolume(float value)
+    {
+        bgmVolume = value;
+        UpdateVolumes();
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        sfxVolume = value;
+        UpdateVolumes();
+    }
+
+    public float GetMasterVolume() => masterVolume;
+    public float GetBGMVolume() => bgmVolume;
+    public float GetSFXVolume() => sfxVolume;
+
+    private void UpdateVolumes()
+    {
+        if (bgmSource != null)
+            bgmSource.volume = bgmVolume * masterVolume;
+        if (sfxSource != null)
+            sfxSource.volume = sfxVolume * masterVolume;
     }
 }

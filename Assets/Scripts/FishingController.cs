@@ -6,13 +6,14 @@ public class FishingController : MonoBehaviour
     public GameObject fishPrefab;
     public Transform spawnPoint;
     public TMP_Text popupText;
+    public FishData[] availableFish;
     private bool isInPond = false;
     private bool isFishing = false;
     private PlayerController playerController;
 
     void Start()
     {
-        playerController = GetComponent<PlayerController>(); // Get the PlayerController on the same GameObject
+        playerController = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -27,32 +28,43 @@ public class FishingController : MonoBehaviour
     {
         isFishing = true;
         if (playerController != null)
-            playerController.isFrozen = true; // Freeze movement
+            playerController.isFrozen = true; 
 
-        ShowPopup("Fishing...");
-        yield return new WaitForSeconds(2f);
+        ShowPopup("fishing...");
+        yield return new WaitForSeconds(3f);
         Fish();
 
         if (playerController != null)
-            playerController.isFrozen = false; // Unfreeze after fishing
+            playerController.isFrozen = false; 
         isFishing = false;
     }
 
-   void Fish()
-{
-    if (fishPrefab != null && spawnPoint != null)
+    void Fish()
     {
-        GameObject fish = Instantiate(fishPrefab, spawnPoint.position, Quaternion.Euler(0, 90, 0));
+        if (availableFish.Length == 0 || spawnPoint == null)
+            return;
 
-        // Adjust size by setting localScale (e.g., half size)
-        fish.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        FishData selectedFish = availableFish[Random.Range(0, availableFish.Length)];
 
-        Destroy(fish, 2f);
-        Debug.Log("Fish caught!");
-        ShowPopup("Fish caught!");
+        if (selectedFish.fishModel != null)
+        {
+            GameObject fish = Instantiate(selectedFish.fishModel, spawnPoint.position, Quaternion.Euler(0, 90, 0));
+            fish.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // optional scale
+            Destroy(fish, 2f);
+
+            Debug.Log("caught: " + selectedFish.fishName);
+            ShowPopup("caught: " + selectedFish.fishName);
+
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayFishingCaughtSFX();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No model assigned for " + selectedFish.fishName);
+        }
     }
-}
-
 
 
     void ShowPopup(string message)

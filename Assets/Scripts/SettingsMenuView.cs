@@ -11,14 +11,18 @@ public class SettingsMenuView : View
 
     public override void Initialize()
     {
-        _backButton.onClick.AddListener(() => ViewManager.ShowLast());
+        _backButton.onClick.AddListener(() =>
+        {
+            AudioManager.instance.PlayButtonPressSFX();  // Play button press sound
+            ViewManager.ShowLast();                       // Then navigate back
+        });
 
-        _mainVolumeSlider.value = AudioManager.Instance.GetMainVolume();
-        _bgmVolumeSlider.value = AudioManager.Instance.GetBGMVolume();
-        _sfxVolumeSlider.value = AudioManager.Instance.GetSFXVolume();
+        _mainVolumeSlider.value = AudioManager.instance.GetMasterVolume();
+        _bgmVolumeSlider.value = AudioManager.instance.GetBGMVolume();
+        _sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
 
-        _mainVolumeSlider.onValueChanged.AddListener(AudioManager.Instance.SetMainVolume);
-        _bgmVolumeSlider.onValueChanged.AddListener(AudioManager.Instance.SetBGMVolume);
-        _sfxVolumeSlider.onValueChanged.AddListener(AudioManager.Instance.SetSFXVolume);
+        _mainVolumeSlider.onValueChanged.AddListener(AudioManager.instance.SetMasterVolume);
+        _bgmVolumeSlider.onValueChanged.AddListener(AudioManager.instance.SetBGMVolume);
+        _sfxVolumeSlider.onValueChanged.AddListener(AudioManager.instance.SetSFXVolume);
     }
 }
