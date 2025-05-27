@@ -38,16 +38,22 @@ public class FishingController : MonoBehaviour
         isFishing = false;
     }
 
-    void Fish()
+   void Fish()
+{
+    if (fishPrefab != null && spawnPoint != null)
     {
-        if (fishPrefab != null && spawnPoint != null)
-        {
-            GameObject fish = Instantiate(fishPrefab, spawnPoint.position, Quaternion.identity);
-            Destroy(fish, 2f);
-            Debug.Log("Fish caught!");
-            ShowPopup("Fish caught!");
-        }
+        GameObject fish = Instantiate(fishPrefab, spawnPoint.position, Quaternion.Euler(0, 90, 0));
+
+        // Adjust size by setting localScale (e.g., half size)
+        fish.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+        Destroy(fish, 2f);
+        Debug.Log("Fish caught!");
+        ShowPopup("Fish caught!");
     }
+}
+
+
 
     void ShowPopup(string message)
     {
