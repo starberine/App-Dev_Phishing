@@ -1,19 +1,41 @@
 using UnityEngine;
-using TMPro; // Use TextMeshPro
+using TMPro;
 
 public class FishingController : MonoBehaviour
 {
     public GameObject fishPrefab;
     public Transform spawnPoint;
-    public TMP_Text popupText; // TMP instead of regular Text
+    public TMP_Text popupText;
     private bool isInPond = false;
+    private bool isFishing = false;
+    private PlayerController playerController;
+
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>(); // Get the PlayerController on the same GameObject
+    }
 
     void Update()
     {
-        if (isInPond && Input.GetKeyDown(KeyCode.E))
+        if (isInPond && !isFishing && Input.GetKeyDown(KeyCode.E))
         {
-            Fish();
+            StartCoroutine(FishingRoutine());
         }
+    }
+
+    System.Collections.IEnumerator FishingRoutine()
+    {
+        isFishing = true;
+        if (playerController != null)
+            playerController.isFrozen = true; // Freeze movement
+
+        ShowPopup("Fishing...");
+        yield return new WaitForSeconds(2f);
+        Fish();
+
+        if (playerController != null)
+            playerController.isFrozen = false; // Unfreeze after fishing
+        isFishing = false;
     }
 
     void Fish()
@@ -33,6 +55,7 @@ public class FishingController : MonoBehaviour
         {
             popupText.text = message;
             popupText.gameObject.SetActive(true);
+            CancelInvoke("HidePopup");
             Invoke("HidePopup", 2f);
         }
     }

@@ -1,34 +1,43 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 public class BestiaryManager : MonoBehaviour
 {
-    public static BestiaryManager Instance;
+    public GameObject bestiaryPanel;
+    public GameObject fishButtonPrefab;
+    public Transform listContent;
 
-    private HashSet<string> caughtFish = new HashSet<string>();
+    public TMP_Text fishNameText;
+    public TMP_Text fishScientificNameText;
+    public TMP_Text fishLocationText;
+    public TMP_Text fishDescriptionText;
+    public Image fishImage;
 
-    void Awake()
+    public List<FishData> allFish;
+
+    void Start()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
-
-    public void RegisterFish(string fishName)
-    {
-        if (caughtFish.Add(fishName))
+        foreach (var fish in allFish)
         {
-            Debug.Log($"New fish caught: {fishName}!");
-        }
-        else
-        {
-            Debug.Log($"Caught another {fishName}.");
+            GameObject btn = Instantiate(fishButtonPrefab, listContent);
+            btn.GetComponentInChildren<TMP_Text>().text = fish.fishName;
+            btn.GetComponent<Button>().onClick.AddListener(() => ShowFishInfo(fish));
         }
     }
 
-    public IEnumerable<string> GetCaughtFish()
+    public void ShowFishInfo(FishData fish)
     {
-        return caughtFish;
+        fishNameText.text = fish.fishName;
+        fishScientificNameText.text = fish.fishScientificName;
+        fishLocationText.text = fish.fishLocation;
+        fishDescriptionText.text = fish.fishDescription;
+        fishImage.sprite = fish.fishSprite;
+    }
+
+    public void ToggleBestiary(bool show)
+    {
+        bestiaryPanel.SetActive(show);
     }
 }

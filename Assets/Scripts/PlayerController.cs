@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
+    public bool isFrozen = false; 
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isFrozen) return; // Block input if frozen
+
         Move();
         Jump();
     }
