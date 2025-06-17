@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da965973d3f4efb4cafa264bb0dcd4d9, type: 3}
+  m_Name: Copperband Butterflyfish
+  m_EditorClassIdentifier: 
+  fishName: Copperband Butterflyfish
+  fishScientificName: Chelmon rostratus
+  fishLocation: Saltwater
+  fishDescription: The copperband butterflyfish, also known as the beaked coral fish,
+    is found in reefs in both the Pacific and Indian Oceans. This butterflyfish is
+    one of the three species that make up the genus Chelmon and all have long beaks.
+  fishSprite: {fileID: 0}
+  fishModel: {fileID: 5549975545663039395, guid: d3463b6baa7c29a4e8ca0b7f93f59b75, type: 3}

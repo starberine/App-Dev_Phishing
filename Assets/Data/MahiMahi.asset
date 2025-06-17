@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da965973d3f4efb4cafa264bb0dcd4d9, type: 3}
+  m_Name: MahiMahi
+  m_EditorClassIdentifier: 
+  fishName: Dorado
+  fishScientificName: Coryphaena hippurus
+  fishLocation: Saltwater
+  fishDescription: The Dorado (mahi-mahi) or common dolphinfish is a surface-dwelling
+    ray-finned fish found in off-shore temperate, tropical, and subtropical waters
+    worldwide. It is also widely called dorado and dolphin. It is one of two members
+    of the family Coryphaenidae, the other being the pompano dolphinfish.
+  fishSprite: {fileID: 0}
+  fishModel: {fileID: 3362454520685410294, guid: 73e61bd2a559d0f47ab4c892c8294798, type: 3}

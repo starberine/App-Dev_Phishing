@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da965973d3f4efb4cafa264bb0dcd4d9, type: 3}
+  m_Name: Moonfish
+  m_EditorClassIdentifier: 
+  fishName: Chabita
+  fishScientificName: Menidae
+  fishLocation: Saltwater
+  fishDescription: Chabita is a moonfish of the genus Mene, the sole extant genus
+    of the family Menidae, are disk-shaped fish which bear a vague resemblance to
+    gourami, thanks to their thread-like pelvic fins.
+  fishSprite: {fileID: 0}
+  fishModel: {fileID: 4598032629485803602, guid: 24dd24b5c14f735468509ece59de5dab, type: 3}
