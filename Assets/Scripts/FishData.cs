@@ -12,6 +12,6 @@ public class FishData : ScriptableObject
 
     [Header("Visuals")]
     public Sprite fishSprite;
-    public GameObject fishModel; // <-- 3D model prefab
+    public GameObject fishModel;
     
 }

@@ -12,7 +12,7 @@ public class GameMenuView : View
 
     private void OnBestiaryButtonClick()
     {
-        AudioManager.instance.PlayButtonPressSFX();   
+        //AudioManager.instance.PlayButtonPressSFX();   
         ViewManager.Show<BestiaryMenuView>();          
     }
 }

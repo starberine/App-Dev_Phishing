@@ -7,12 +7,14 @@ public class MainMenuView : View
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _settingsButton;
+    [SerializeField] private Button _resetButton;
 
     public override void Initialize()
     {
         _playButton.onClick.AddListener(PlayGame);
         _exitButton.onClick.AddListener(ExitGame);
         _settingsButton.onClick.AddListener(OpenSettings);
+        _resetButton.onClick.AddListener(ResetBestiaryProgress);
     }
 
     private void PlayGame()
@@ -26,10 +28,17 @@ public class MainMenuView : View
         AudioManager.instance.PlayButtonPressSFX();
         Application.Quit();
     }
-    
+
     private void OpenSettings()
     {
         AudioManager.instance.PlayButtonPressSFX();
         ViewManager.Show<SettingsMenuView>();
+    }
+    
+    private void ResetBestiaryProgress()
+    {
+        AudioManager.instance.PlayButtonPressSFX();
+        BestiarySaveSystem.Clear();
+        Debug.Log("Bestiary save cleared.");
     }
 }
