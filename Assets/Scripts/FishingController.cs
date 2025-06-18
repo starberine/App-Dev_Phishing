@@ -11,7 +11,6 @@ public class FishingController : MonoBehaviour
     public TMP_Text popupText;
     public TMP_InputField inputField;
     public FishData[] availableFish;
-    public string[] fishingWords = { "catch", "hook", "bait", "reel", "tug" };
 
     private bool isInPond = false;
     private bool isFishing = false;
@@ -26,6 +25,9 @@ public class FishingController : MonoBehaviour
     private Camera mainCam;
     private bool enteredManually = false;
     [Range(0, 4)] public int islandIndex = 0;
+    [Header("Respawn System")]
+    public Transform[] respawnPoints = new Transform[5];
+    public float respawnDelay = 2f;
 
     void Start()
     {
@@ -44,7 +46,7 @@ public class FishingController : MonoBehaviour
         PortalManager portalManager = FindObjectOfType<PortalManager>();
         if (portalManager != null)
         {
-                portalManager.UpdatePortalVisibility();
+            portalManager.UpdatePortalVisibility();
         }
     }
 
@@ -87,7 +89,15 @@ public class FishingController : MonoBehaviour
         float waitTime = Random.Range(1f, 3f);
         yield return new WaitForSeconds(waitTime);
 
-        currentWord = fishingWords[Random.Range(0, fishingWords.Length)];
+        if (IslandWordsManager.instance != null)
+        {
+            currentWord = IslandWordsManager.instance.GetRandomWord(islandIndex);
+        }
+        else
+        {
+            currentWord = "???";
+            Debug.LogWarning("[FishingController] IslandWordsManager not found!");
+        }
         ShowPopup("Type: " + currentWord);
 
         if (inputField != null)
@@ -176,7 +186,7 @@ public class FishingController : MonoBehaviour
             if (AudioManager.instance != null)
                 AudioManager.instance.PlayFishingCaughtSFX();
 
-        SaveCaughtFish(selectedFish.fishName);
+            SaveCaughtFish(selectedFish.fishName);
         }
         else
         {
@@ -220,6 +230,10 @@ public class FishingController : MonoBehaviour
         {
             isInPond = true;
         }
+        else if (other.CompareTag("Respawn"))
+        {
+            StartCoroutine(RespawnRoutine());
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -244,7 +258,7 @@ public class FishingController : MonoBehaviour
             {
                 manager.RefreshBestiary();
             }
-            
+
             PortalManager portalManager = FindObjectOfType<PortalManager>();
             if (portalManager != null)
             {
@@ -265,5 +279,34 @@ public class FishingController : MonoBehaviour
             c.a = alpha;
             floatingPromptText.color = c;
         }
+    }
+
+    IEnumerator RespawnRoutine()
+    {
+        if (playerController != null)
+        {
+            playerController.isFrozen = true;
+            ShowPopup("Respawning...");
+        }
+        isFishing = false;
+        canFish = true;
+        
+        yield return new WaitForSeconds(respawnDelay);
+
+        if (islandIndex >= 0 && islandIndex < respawnPoints.Length && respawnPoints[islandIndex] != null)
+        {
+            Transform targetPoint = respawnPoints[islandIndex];
+            transform.position = targetPoint.position;
+            transform.rotation = targetPoint.rotation;
+        }
+        else
+        {
+            Debug.LogWarning("[FishingController] Invalid respawn point for islandIndex " + islandIndex);
+        }
+
+        if (playerController != null)
+            playerController.isFrozen = false;
+
+        ShowPopup("Respawned.");
     }
 }
