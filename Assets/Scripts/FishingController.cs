@@ -52,7 +52,7 @@ public class FishingController : MonoBehaviour
 
     void Update()
     {
-        if (isInPond && !isFishing && canFish && Input.GetKeyDown(KeyCode.E))
+        if (isInPond && !isFishing && canFish && playerController != null && playerController.isGrounded && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(FishingRoutine());
         }
