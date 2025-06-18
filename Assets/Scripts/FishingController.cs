@@ -24,6 +24,8 @@ public class FishingController : MonoBehaviour
     public float fadeSpeed = 2f;
     private float currentAlpha = 0f;
     private Camera mainCam;
+    private bool enteredManually = false;
+    [Range(0, 4)] public int islandIndex = 0;
 
     void Start()
     {
@@ -33,12 +35,16 @@ public class FishingController : MonoBehaviour
         if (inputField != null)
         {
             inputField.gameObject.SetActive(false);
-            inputField.onEndEdit.AddListener(CheckTypedWord);
         }
 
         if (floatingPromptText != null)
         {
             SetPromptAlpha(0f); // Hide initially
+        }
+        PortalManager portalManager = FindObjectOfType<PortalManager>();
+        if (portalManager != null)
+        {
+                portalManager.UpdatePortalVisibility();
         }
     }
 
@@ -59,6 +65,13 @@ public class FishingController : MonoBehaviour
             float targetAlpha = (isInPond && !isFishing && !inputActive && canFish) ? 1f : 0f;
             currentAlpha = Mathf.MoveTowards(currentAlpha, targetAlpha, fadeSpeed * Time.deltaTime);
             SetPromptAlpha(currentAlpha);
+        }
+
+        // Detect Enter key ONLY while input is active
+        if (isFishing && inputField != null && inputField.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Return))
+        {
+            enteredManually = true;
+            CheckTypedWord(inputField.text);
         }
     }
 
@@ -106,6 +119,10 @@ public class FishingController : MonoBehaviour
     {
         if (!isFishing) return;
 
+        // Only proceed if Enter was pressed (Input.GetKeyDown won't work here, so we set a flag manually)
+        if (!enteredManually) // <-- We'll define this flag shortly
+            return;
+
         inputField.gameObject.SetActive(false);
 
         if (typed.Trim().ToLower() == currentWord.ToLower())
@@ -119,6 +136,8 @@ public class FishingController : MonoBehaviour
             ShowPopup("Failed!");
             EndFishing(false);
         }
+
+        enteredManually = false; // Reset
     }
 
     void EndFishing(bool success)
@@ -143,7 +162,7 @@ public class FishingController : MonoBehaviour
         if (availableFish.Length == 0 || spawnPoint == null)
             return;
 
-        FishData selectedFish = availableFish[Random.Range(0, availableFish.Length)];
+        FishData selectedFish = GetFishForIsland();
 
         if (selectedFish.fishModel != null)
         {
@@ -157,12 +176,23 @@ public class FishingController : MonoBehaviour
             if (AudioManager.instance != null)
                 AudioManager.instance.PlayFishingCaughtSFX();
 
-            SaveCaughtFish(selectedFish.fishName);
+        SaveCaughtFish(selectedFish.fishName);
         }
         else
         {
             Debug.LogWarning("No model assigned for " + selectedFish.fishName);
         }
+    }
+
+    private FishData GetFishForIsland()
+    {
+        int fishableCount = Mathf.Clamp((islandIndex + 1) * 2, 0, availableFish.Length);
+        return availableFish[Random.Range(0, fishableCount)];
+    }
+
+    public void SetIsland(int island)
+    {
+        islandIndex = island;
     }
 
     void ShowPopup(string message)
@@ -213,6 +243,16 @@ public class FishingController : MonoBehaviour
             if (manager != null)
             {
                 manager.RefreshBestiary();
+            }
+            
+            PortalManager portalManager = FindObjectOfType<PortalManager>();
+            if (portalManager != null)
+            {
+                portalManager.UpdatePortalVisibility();
+            }
+            else
+            {
+                Debug.Log("No PortalManager found");
             }
         }
     }
