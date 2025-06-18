@@ -15,6 +15,8 @@ public class BestiaryManager : MonoBehaviour
 
     public List<FishData> allFish;
 
+    public CelebrationManager celebrationManager; // ✅ NEW
+
     private HashSet<string> caughtFishNames;
 
     private readonly Color visibleColor = Color.white;
@@ -25,7 +27,6 @@ public class BestiaryManager : MonoBehaviour
         caughtFishNames = new HashSet<string>(BestiarySaveSystem.Load());
         Debug.Log($"[Init] Loaded caught fish: {string.Join(", ", caughtFishNames)}");
 
-        // Dynamically find all FishButtonHandler components in scene (including inactive children of the panel)
         FishButtonHandler[] fishButtons = bestiaryPanel.GetComponentsInChildren<FishButtonHandler>(true);
 
         foreach (var button in fishButtons)
@@ -35,12 +36,10 @@ public class BestiaryManager : MonoBehaviour
             {
                 Debug.Log($"[Init] Button '{button.fishName}' linked to FishData '{fish.fishName}'");
 
-                // Cache sprite and tint
                 bool isCaught = caughtFishNames.Contains(fish.fishName);
                 button.fishIcon.sprite = fish.fishSprite;
                 button.fishIcon.color = isCaught ? visibleColor : silhouetteTint;
 
-                // Setup listener
                 button.GetComponent<Button>().onClick.RemoveAllListeners();
                 button.GetComponent<Button>().onClick.AddListener(() => ShowFishInfo(fish));
             }
@@ -73,7 +72,14 @@ public class BestiaryManager : MonoBehaviour
             button.fishIcon.sprite = fish.fishSprite;
             button.fishIcon.color = isCaught ? visibleColor : silhouetteTint;
         }
-        ClearFishInfo(); 
+
+        ClearFishInfo();
+
+        // ✅ NEW: Check for bestiary completion
+        if (celebrationManager != null)
+        {
+            celebrationManager.CheckCompletion(allFish, caughtFishNames);
+        }
     }
 
     public void ShowFishInfo(FishData fish)
