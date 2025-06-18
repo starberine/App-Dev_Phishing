@@ -18,5 +18,5 @@ MonoBehaviour:
   fishDescription: 'Loro, or Parrotfish, are marine fish, meaning they live in saltwater
     environments, specifically tropical and subtropical waters. They are commonly
     found in shallow waters near coral reefs, rocky coastlines, and seagrass beds. '
-  fishSprite: {fileID: -861493763, guid: 1976d6562bf13c146a80c9408f2a1360, type: 3}
+  fishSprite: {fileID: 1792899698, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 3970629186855685629, guid: c5bb1e4f1a1a2e44eadaf5948f455c20, type: 3}

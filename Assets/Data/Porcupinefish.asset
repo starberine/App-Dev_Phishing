@@ -19,5 +19,5 @@ MonoBehaviour:
     family Diodontidae from the order Tetraodontiformes which are also commonly called
     blowfish and, sometimes, balloonfish and globefish. The family includes about
     18 species.
-  fishSprite: {fileID: -2109351499, guid: 1976d6562bf13c146a80c9408f2a1360, type: 3}
+  fishSprite: {fileID: -1419150484, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 5505473979056060938, guid: d6f810880d6f1324398b3861d5abd696, type: 3}

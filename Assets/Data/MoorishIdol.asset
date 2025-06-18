@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da965973d3f4efb4cafa264bb0dcd4d9, type: 3}
+  m_Name: MoorishIdol
+  m_EditorClassIdentifier: 
+  fishName: Moorish Idol
+  fishScientificName: Zanclus cornutus
+  fishLocation: Saltwater
+  fishDescription: The Moorish idol is a species of marine ray-finned fish belonging
+    to the family Zanclidae. It is the only member of the monospecific genus Zanclus
+    and the only extant species within the Zanclidae. This species is found on reefs
+    in the Indo-Pacific region.
+  fishSprite: {fileID: -2099483324, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
+  fishModel: {fileID: 438683517701022146, guid: 3545245f08f5f95439bc99674798a7bd, type: 3}

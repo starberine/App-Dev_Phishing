@@ -18,5 +18,5 @@ MonoBehaviour:
   fishDescription: A Dilis, or an anchovy, is a small, common forage fish of the
     family Engraulidae. Most species are found in marine waters, but several will
     enter brackish water, and some in South America are restricted to fresh water.
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: -785922984, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 146797063783006586, guid: 6938d86e82cf77d42a1e4939c8589a61, type: 3}

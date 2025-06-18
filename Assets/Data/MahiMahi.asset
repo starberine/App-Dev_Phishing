@@ -19,5 +19,5 @@ MonoBehaviour:
     ray-finned fish found in off-shore temperate, tropical, and subtropical waters
     worldwide. It is also widely called dorado and dolphin. It is one of two members
     of the family Coryphaenidae, the other being the pompano dolphinfish.
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: -29533284, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 3362454520685410294, guid: 73e61bd2a559d0f47ab4c892c8294798, type: 3}

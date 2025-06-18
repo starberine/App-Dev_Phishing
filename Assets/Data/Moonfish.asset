@@ -18,5 +18,5 @@ MonoBehaviour:
   fishDescription: Chabita is a moonfish of the genus Mene, the sole extant genus
     of the family Menidae, are disk-shaped fish which bear a vague resemblance to
     gourami, thanks to their thread-like pelvic fins.
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: 1950203498, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 4598032629485803602, guid: 24dd24b5c14f735468509ece59de5dab, type: 3}

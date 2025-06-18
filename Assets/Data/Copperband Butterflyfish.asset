@@ -18,5 +18,5 @@ MonoBehaviour:
   fishDescription: The copperband butterflyfish, also known as the beaked coral fish,
     is found in reefs in both the Pacific and Indian Oceans. This butterflyfish is
     one of the three species that make up the genus Chelmon and all have long beaks.
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: 1489424824, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 5549975545663039395, guid: d3463b6baa7c29a4e8ca0b7f93f59b75, type: 3}

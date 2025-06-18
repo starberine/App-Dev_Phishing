@@ -19,5 +19,5 @@ MonoBehaviour:
     ray-finned fish in the family Epinephelidae, in the order Perciformes. Groupers
     were long considered a subfamily of the seabasses in Serranidae, but are now
     treated as distinct. Not all members of this family are called "groupers".
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: -2075555243, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 2343012170573552243, guid: e729706b3da4f2543ba634b13271d1ac, type: 3}

@@ -19,5 +19,5 @@ MonoBehaviour:
     eyes, eight arms, and two tentacles in the orders Myopsida, Oegopsida, and Bathyteuthida.
     Like all other cephalopods, squid have a distinct head, bilateral symmetry, and
     a mantle.
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: 2012772576, guid: 67c6901a321109d42a3420b292e8311a, type: 3}
   fishModel: {fileID: 7814894404716687748, guid: 02ed8d1e79cf7314cb5994b2dfcb6745, type: 3}
