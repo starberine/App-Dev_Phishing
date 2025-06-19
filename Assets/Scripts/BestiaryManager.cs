@@ -84,6 +84,9 @@ public class BestiaryManager : MonoBehaviour
 
     public void ShowFishInfo(FishData fish)
     {
+        if (AudioManager.instance != null)
+                AudioManager.instance.PlayBestiaryButtonSFX();
+
         bool isCaught = caughtFishNames.Contains(fish.fishName);
         Debug.Log($"[ShowFishInfo] Showing '{fish.fishName}', isCaught: {isCaught}");
 
@@ -116,5 +119,11 @@ public class BestiaryManager : MonoBehaviour
         fishDescriptionText.text = "";
         fishImage.sprite = null;
         fishImage.color = Color.clear;
+    }
+
+    public void PlayOpenSFX()
+    {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayBestiaryOpenSFX();
     }
 }

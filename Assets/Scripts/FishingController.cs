@@ -54,6 +54,8 @@ public class FishingController : MonoBehaviour
     {
         if (isInPond && !isFishing && canFish && playerController != null && playerController.isGrounded && Input.GetKeyDown(KeyCode.E))
         {
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayFishStartSFX();
             StartCoroutine(FishingRoutine());
         }
 
@@ -120,6 +122,8 @@ public class FishingController : MonoBehaviour
         if (isFishing)
         {
             ShowPopup("Too slow!");
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayFishFailSFX();
             inputField.gameObject.SetActive(false);
             EndFishing(false);
         }
@@ -144,6 +148,8 @@ public class FishingController : MonoBehaviour
         else
         {
             ShowPopup("Failed!");
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayFishFailSFX();
             EndFishing(false);
         }
 
@@ -298,6 +304,8 @@ public class FishingController : MonoBehaviour
             Transform targetPoint = respawnPoints[islandIndex];
             transform.position = targetPoint.position;
             transform.rotation = targetPoint.rotation;
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayPortalTeleportSFX();
         }
         else
         {

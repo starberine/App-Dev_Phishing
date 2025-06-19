@@ -12,7 +12,8 @@ public class BestiaryMenuView : View
 
     private void OnBackButtonClick()
     {
-        //AudioManager.instance.PlayButtonPressSFX();  
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayBestiaryCloseSFX();
         ViewManager.ShowLast();                     
     }
 }

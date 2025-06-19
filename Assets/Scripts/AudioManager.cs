@@ -14,6 +14,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameSceneBGM;           // added
     public AudioClip fishingCaughtSFX;       // added
     public AudioClip buttonPressSFX;
+    public AudioClip fishStartSFX;
+    public AudioClip fishFailSFX;
+    public AudioClip bestiaryOpenSFX;
+    public AudioClip bestiaryCloseSFX;
+    public AudioClip bestiaryButtonSFX;
+    public AudioClip portalTeleportSFX;
+    public AudioClip playerJumpSFX;
 
     private float masterVolume = 1f;
     private float bgmVolume = 1f;
@@ -79,6 +86,45 @@ public class AudioManager : MonoBehaviour
     {
         PlaySFX(buttonPressSFX);
     }
+
+    public void PlayFishStartSFX()
+    {
+        PlaySFX(fishStartSFX);
+    }
+
+    public void PlayFishFailSFX()
+    {
+        PlaySFX(fishFailSFX);
+    }
+
+    public void PlayBestiaryOpenSFX()
+    {
+        PlaySFX(bestiaryOpenSFX);
+    }
+
+    public void PlayBestiaryCloseSFX()
+    {
+        PlaySFX(bestiaryCloseSFX);
+    }
+
+    public void PlayBestiaryButtonSFX()
+    {
+        PlaySFX(bestiaryButtonSFX);
+    }
+
+
+    public void PlayPortalTeleportSFX()
+    {
+        PlaySFX(portalTeleportSFX);
+    }
+
+    public void PlayPlayerJumpSFX()
+    {
+        PlaySFX(playerJumpSFX);
+    }
+
+
+
 
     public void SetMasterVolume(float value)
     {

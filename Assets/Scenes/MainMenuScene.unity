@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6bfd84a74f28ed54fa1adb81a99f2833, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1116,6 +1116,13 @@ MonoBehaviour:
   gameSceneBGM: {fileID: 8300000, guid: 11574475d5be48d44b1f041d77d58c1a, type: 3}
   fishingCaughtSFX: {fileID: 8300000, guid: 6d52d1ab75ae7284cbc7a1514d0924e9, type: 3}
   buttonPressSFX: {fileID: 8300000, guid: 7b66bcd5a0c5e9841b58d8093aa722bc, type: 3}
+  fishStartSFX: {fileID: 8300000, guid: 51c8296446be1b94dbe119bd91d77d4c, type: 3}
+  fishFailSFX: {fileID: 8300000, guid: 7b1c8faaac8609b48a15eaf7b77350c6, type: 3}
+  bestiaryOpenSFX: {fileID: 8300000, guid: 7ca1549b10a92f3408af8ed764dc55dc, type: 3}
+  bestiaryCloseSFX: {fileID: 8300000, guid: 114a809dc34e89e48ae75d744d1252ec, type: 3}
+  bestiaryButtonSFX: {fileID: 8300000, guid: 315758013708d444b90d6b09051a2136, type: 3}
+  portalTeleportSFX: {fileID: 8300000, guid: 9acc1c2db69f61443a354af864d92d42, type: 3}
+  playerJumpSFX: {fileID: 8300000, guid: 61186043bf5fb79449bc66cd5d5599b8, type: 3}
 --- !u!1 &810683465
 GameObject:
   m_ObjectHideFlags: 0

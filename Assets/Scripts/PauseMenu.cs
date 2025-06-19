@@ -26,6 +26,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (AudioManager.instance != null)
+             AudioManager.instance.PlayButtonPressSFX();
         Time.timeScale = 1f;
         isPaused = false;
         if (pauseCanvas != null)
@@ -34,6 +36,8 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        if (AudioManager.instance != null)
+             AudioManager.instance.PlayButtonPressSFX();
         Time.timeScale = 0f;
         isPaused = true;
         if (pauseCanvas != null)

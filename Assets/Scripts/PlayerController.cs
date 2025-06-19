@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlayPlayerJumpSFX();
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }

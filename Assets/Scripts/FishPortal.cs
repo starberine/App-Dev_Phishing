@@ -44,6 +44,9 @@ public class FishPortal : MonoBehaviour
 
     private System.Collections.IEnumerator TeleportPlayer(Transform player)
     {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayPortalTeleportSFX();
+
         isTeleporting = true;
         isOnCooldown = true;
 
