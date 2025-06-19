@@ -8,25 +8,29 @@ public class CelebrationManager : MonoBehaviour
     public ParticleSystem celebrationParticles;
     public AudioSource celebrationSound;
 
-    private CanvasGroup canvasGroup; // ✅ for fading
-    private bool hasCelebrated = false;
+    private CanvasGroup canvasGroup;
+    private CelebrationSaveData celebrationData;
 
     void Awake()
     {
         if (celebrationPanel != null)
             canvasGroup = celebrationPanel.GetComponent<CanvasGroup>();
+
+        celebrationData = CelebrationSaveSystem.Load(); // Load the flag
     }
 
     public void CheckCompletion(List<FishData> allFish, HashSet<string> caughtFishNames)
     {
-        if (hasCelebrated) return;
+        if (celebrationData == null || celebrationData.hasCelebrated)
+            return;
 
         bool isComplete = allFish.TrueForAll(fish => caughtFishNames.Contains(fish.fishName));
 
         if (isComplete)
         {
             TriggerCelebration();
-            hasCelebrated = true;
+            celebrationData.hasCelebrated = true;
+            CelebrationSaveSystem.Save(celebrationData); // Save the flag
         }
     }
 
@@ -40,7 +44,7 @@ public class CelebrationManager : MonoBehaviour
             if (canvasGroup != null)
             {
                 canvasGroup.alpha = 1f;
-                StartCoroutine(FadeOutCelebration());
+                StartCoroutine(DelayedFadeOut());
             }
         }
 
@@ -48,30 +52,20 @@ public class CelebrationManager : MonoBehaviour
             celebrationParticles.Play();
 
         if (celebrationSound != null)
-        {
-            Debug.Log("[Celebration] Playing celebration sound!");
             celebrationSound.Play();
-        }
-        else
-        {
-            Debug.LogWarning("[Celebration] celebrationSound is null!");
-        }
     }
 
-    private IEnumerator FadeOutCelebration()
+    private IEnumerator DelayedFadeOut()
     {
-        float holdDuration = 4f;
-        float fadeDuration = 2f;
+        yield return new WaitForSeconds(5f); // Wait before fading
 
-        // Wait while panel is fully visible
-        yield return new WaitForSeconds(holdDuration);
-
-        // Then fade out
+        float duration = 3f;
         float elapsed = 0f;
-        while (elapsed < fadeDuration)
+
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            float t = 1f - (elapsed / fadeDuration);
+            float t = 1f - (elapsed / duration);
             canvasGroup.alpha = t;
             yield return null;
         }
@@ -79,5 +73,4 @@ public class CelebrationManager : MonoBehaviour
         canvasGroup.alpha = 0f;
         celebrationPanel.SetActive(false);
     }
-
 }

@@ -39,6 +39,7 @@ public class MainMenuView : View
     {
         AudioManager.instance.PlayButtonPressSFX();
         BestiarySaveSystem.Clear();
+        CelebrationSaveSystem.ResetCelebrationFlag();
         Debug.Log("Bestiary save cleared.");
     }
 }
